@@ -26,7 +26,7 @@ router.post('/', function(req, res){
 								sessionToken: token
 							});
 					} else {
-						res.status(500).send({error: "failed to authenticate"});
+						res.status(500).send({error: "failed to authenticate2"});
 					}
 				});
 			} else {

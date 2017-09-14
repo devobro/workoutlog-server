@@ -6,8 +6,11 @@ var Definition = sequelize.import('../models/definition');
 
 router.post('/', function(req,res){
 	//req has some body properties that have a username and pwd
-	console.log(req.body.log.desc)
+	// console.log(req.body.log.desc)
+	// var description = req.body.log.description;
+	// var description = req.body.definition.desc;
 	var description = req.body.log.desc;
+	var calorie = req.body.log.calorie; //added
 	var result = req.body.log.result;
 	var user = req.user;
 	var definition = req.body.log.def;
@@ -15,6 +18,7 @@ router.post('/', function(req,res){
 	//Use our sequelize model to create log
 	Log.create({
 		description: description,
+		calorie: calorie, //added
 		result: result,
 		owner: user.id,
 		def: definition
@@ -48,7 +52,8 @@ router.get('/', function(req,res){
 //This will retrieve one workout specified by the log id
 router.get('/:id', function(req,res){
 	var data = req.params.id;
-	// console.log(data);
+	console.log(req.params);
+	console.log(data);
 	Log.findOne({
 
 		where: { id: data}
@@ -67,13 +72,15 @@ router.get('/:id', function(req,res){
 
 //this will return the data from the log that was updated
 router.put('/', function(req,res){
-	var description = req.body.log.desc;
+	var description = req.body.log.description;
+	var calorie = req.body.log.calorie;//added
 	var result = req.body.log.result;
 	var data = req.body.log.id;
 	var definition = req.body.log.def;
 	// console.log(req);
 	Log.update({
 		description: description,
+		calorie: calorie,//added
 		result: result,
 		def: definition
 	},
